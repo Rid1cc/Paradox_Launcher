@@ -1,2 +1,0 @@
-# topxlauncher
-electron based launcher
