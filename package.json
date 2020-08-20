@@ -5,6 +5,7 @@
   "author": "Ridicc",
   "private": true,
   "main": "public/Main.js",
+  "license": "ISC",
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.11.0",

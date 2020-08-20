@@ -6,8 +6,9 @@
 // |_|  \_\_|\__,_|_|\___\___| paradox launcher -
 // code is dark and chaotic for now.
 // gonna be optimised in the future.
-// If you want to modify this, let me know. 
-// I want to know that it's time to celebrate :p
+// If you want to modify this and you are able to share some experience with this code let me know. 
+// You are able to use this software under MIT license (full license file is available in this repository)
+// More about MIT -> https://choosealicense.com/licenses/mit/
                                         
 import React from 'react';
 import {Paper} from '@material-ui/core'
