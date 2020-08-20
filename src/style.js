@@ -20,10 +20,17 @@ export const useStyles = makeStyles({
       backgroundColor: 'red',
       right: 0
     },
+    versionInfo:{
+      marginTop: '-3vh',
+      paddingBottom: '1vh',
+      fontSize: '1vw'
+    },
     h1: {
-      marginTop: '1vw',
+      marginTop: '-2vh',
       textAlign: 'center',
-      fontSize: '3vw'
+      fontSize: '3vw',
+      WebkitAppRegion: 'drag',
+      
     },
     input: {
       marginRight: '20px'
@@ -37,10 +44,8 @@ export const useStyles = makeStyles({
       bottom: 0,
       right: '1vw',
       display: 'inline-flex',
-      flexGrow: '5',
       padding: '1vw',
-      transition: 'right 300ms',
-      
+      marginBottom: '4vh',
 
     },
     fonting:{
@@ -97,6 +102,7 @@ export const useStyles = makeStyles({
         bottom: 0,
         left: '1vw',
         display: 'flex',
+        marginBottom: '4vh',
     
     },
     hoovArrow: {

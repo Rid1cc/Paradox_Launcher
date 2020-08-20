@@ -1,6 +1,8 @@
 {
-  "name": "elec",
-  "version": "0.1.0",
+  "name": "paradox_launcher",
+  "description": "Simple minecraft launcher",
+  "version": "0.1.5",
+  "author": "Ridicc",
   "private": true,
   "main": "public/Main.js",
   "homepage": "./",
@@ -10,8 +12,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "custom-electron-titlebar": "^3.2.3",
+    "custom-electron-titlebar": "^3.2.4",
     "electron-json-storage": "^4.2.0",
+    "electron-util": "^0.14.2",
     "fs": "0.0.1-security",
     "minecraft-launcher-core": "^3.14.6",
     "path": "^0.12.7",
@@ -52,6 +55,7 @@
   },
   "build": {
     "appId": "nonExistentID",
+    "icon": "public/images/icon.png",
     "files": [
       "build/**/*",
       "node_modules/**/*"

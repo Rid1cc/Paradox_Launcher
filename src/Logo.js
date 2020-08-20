@@ -12,5 +12,8 @@ export const Logo = () => {
           <div class={classes.logo}>
             Paradox Launcher
           </div>
+          <div class={classes.versionInfo}>
+            alpha
+          </div>
         </Paper>  
       </h1>}

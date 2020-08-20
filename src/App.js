@@ -27,6 +27,7 @@ import {LoadBar} from './LoadBar'
 import wall0 from './media/wall0.png'
 import wall1 from './media/wall1.png'
 import wall2 from './media/wall2.png'
+import CancelIcon from '@material-ui/icons/Cancel';
 const electron = window.require('electron')
 const ipc = electron.ipcRenderer
 
@@ -107,6 +108,9 @@ const App = () => {
     const handleClick = () => {
       ipc.send('logIn', {user, pass});
     }
+    ipc.send('saveTheme', {theme: valueTheme})
+    
+  
 
   
     const handleUserChange = (event) => {
@@ -123,16 +127,17 @@ const App = () => {
 
   return (
     //BASIC THEME AND ROOT CSS
+    <body>
     <div style={{
-      margin: '40px',
-      border: '5px solid pink',
       backgroundImage: 'url('+bgImg+')' ,
       backgroundSize: 'cover',
-      height: '100vh',
-      marginTop: '-5vh',
-      marginLeft: '-1vw',
-      marginRight: '-1vw',
-      paddingBottom: '5vh'
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      border: '3px solid #404040',
+      borderRadius: '3px'
     }}>
     <ThemeProvider theme={darkTheme}>
     <div className={classes.root}>
@@ -153,6 +158,9 @@ const App = () => {
         </Paper>
         <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
           <ImageIcon color="secondary" className={classes.settingsIcon}/>   
+        </Paper>
+        <Paper className={classes.settingsCanvas} onClick={() => window.close()}>
+          <CancelIcon color="secondary" className={classes.settingsIcon}/>   
         </Paper>
       </div>
 
@@ -200,6 +208,7 @@ const App = () => {
     </div>
     </ThemeProvider>
     </div>
+    </body>
   );
 }
 

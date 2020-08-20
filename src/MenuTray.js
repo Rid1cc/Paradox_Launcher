@@ -4,7 +4,8 @@ import './App.css'
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import {useStyles} from './style'
 import ImageIcon from '@material-ui/icons/Image';
-import {Settings} from './Settings'
+import {Settings} from './Settings';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 export const MenuTray = (setOpenSettings, setOpenThemes) => {
     const classes = useStyles()
@@ -14,6 +15,9 @@ export const MenuTray = (setOpenSettings, setOpenThemes) => {
     </Paper>
     <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
       <ImageIcon color="secondary" className={classes.settingsIcon}/>   
+    </Paper>
+    <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
+      <HighlightOffIcon color="secondary" className={classes.settingsIcon}/>   
     </Paper>
     </div>
 

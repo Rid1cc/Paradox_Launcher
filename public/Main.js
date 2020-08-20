@@ -1,7 +1,13 @@
-const {app, BrowserWindow, ipcMain } = require('electron')    
+const {app, BrowserWindow, ipcMain } = require('electron')
+const { is } = require('electron-util');    
 const path = require('path')
 const fs = require('fs')
 const { Client, Authenticator } = require('minecraft-launcher-core');
+const nativeImage = require('electron').nativeImage;
+    var image = nativeImage.createFromPath(__dirname + 'public/images/icon.png'); 
+ // where public folder on the root dir
+
+    image.setTemplateImage(true);
 
 const runMC = (token) => {
   const launcher = new Client();
@@ -14,8 +20,8 @@ const runMC = (token) => {
         type: "release"
     },
     memory: {
-        max: "6000",
-        min: "4000"
+        max: "16000",
+        min: "6000"
     }
   }
   launcher.launch(opts);
@@ -41,6 +47,10 @@ function createWindow () {
         width: 1280, 
         height: 720,
         resizable: false,
+        transparent: false, 
+        frame: false,
+        thickFrame: false,
+        transparent: true,
         icon: path.join(__dirname, './images/icon.png'),
 
         webPreferences: {
@@ -50,12 +60,8 @@ function createWindow () {
 
     win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
     win.setMenu(null)
-    // win.maximaze()
-    // win.setMaximizable(false)
-    // win.setResizable(false)
-
-
 }
+
 app.on('ready', createWindow)
 
 ipcMain.on('logIn', (event, arg) => {
