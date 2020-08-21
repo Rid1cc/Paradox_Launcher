@@ -1,6 +1,8 @@
 # Paradox Launcher
 Simple electron + react minecraft launcher.
 
+## !!! JAVA 64 BIT NEEDED !!!
+
 
 ## Installation for the players
 
