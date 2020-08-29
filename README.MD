@@ -10,11 +10,18 @@ Still in dev.
 
 ## Dev Installation
 
-With npm installed, run:
+Firstable :
+
+```bash
+npm install
+```
+
+Then :
 
 ```bash
 npm run electron-pack
 ```
+
 #### When done, go to: 
 ##### (FOR WINDOWS USERS) /dist/win-unpacked/ and open paradox_launcher.exe
 ##### (FOR LINUX USERS) /dist/linux-unpacked/ run ./paradox_launcher
