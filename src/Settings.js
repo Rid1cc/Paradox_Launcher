@@ -48,18 +48,18 @@ import {
           value={mcVersions}
           onChange={handleChangeVersions}
         >
-          <MenuItem value="1.16.1">
-            <em>1.16.1</em>
+          <MenuItem value="1.15.2">
+            <em>The Outer Paradox</em>
           </MenuItem>
-          <MenuItem value={'1.15.2'}>1.15.2</MenuItem>
+          {/* <MenuItem value={'1.15.2'}>1.15.2</MenuItem>
           <MenuItem value={'1.14.4'}>1.14.4</MenuItem>
-          <MenuItem value={'1.12.2'}>1.12.2</MenuItem>
+          <MenuItem value={'1.12.2'}>1.12.2</MenuItem> */}
         </Select>
         <TextField 
           className={classes.elementSettings}
           color="secondary"
           id="standard-multiline-flexible"
-          label="Minimum Ram"
+          label="Minimum Ram (MB)"
           value={minRam}
           onChange={handleChangeMinRam}
         />
@@ -67,7 +67,7 @@ import {
           className={classes.elementSettings}
           color = "secondary"
           id="standard-multiline-flexible"
-          label="Maximum Ram"
+          label="Maximum Ram (MB)"
           value={maxRam}
           onChange={handleChangeMaxRam}
         />

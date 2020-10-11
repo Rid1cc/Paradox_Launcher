@@ -9,27 +9,28 @@ const nativeImage = require('electron').nativeImage;
 
     image.setTemplateImage(true);
 
-const runMC = (token) => {
+const runMC = (token, minRam, maxRam) => {
   const launcher = new Client();
-  const opts = {
+  const opts  = {
     clientPackage: null,
     authorization: token,
     root: "./minecraft",
     version: {
-        number: "1.14",
+        number: "1.15.2",
         type: "release"
     },
     memory: {
-        max: "16000",
-        min: "6000"
+        max: minRam,
+        min: maxRam,
     }
+    //i just can't do it normally so max ram is min ram etc. XDD
   }
   launcher.launch(opts);
   launcher.on('debug', (e) => console.log(e));
   launcher.on('data', (e) => console.log(e));
 
 }
-const logIn = (event, user, pass) => {
+const logIn = (event, user, pass, minRam, maxRam) => {
     if(pass) {
       Authenticator.getAuth(user, pass).then(token => runMC(token)).catch(err => {
         console.log(err)
@@ -37,7 +38,7 @@ const logIn = (event, user, pass) => {
       }
         )
     } else {
-      Authenticator.getAuth(user).then(token => runMC(token))
+      Authenticator.getAuth(user).then(token => runMC(token, minRam, maxRam))
     }
   }
 
@@ -64,11 +65,15 @@ function createWindow () {
 
 app.on('ready', createWindow)
 
-ipcMain.on('logIn', (event, arg) => {
-  logIn(event, arg.user, arg.pass)
+ipcMain.on('memory', (event, arg) => {
+  console.log(event, arg.maxRam, arg.minRam)
 })
 
-ipcMain.on('saveTheme', (event, arg) => {
-  console.log(arg)
-  // fs.writeFileSync('theme.json', arg)
+ipcMain.on('logIn', (event, arg) => {
+  logIn(event, arg.user, arg.pass, arg.maxRam, arg.minRam)
 })
+
+// ipcMain.on('saveTheme', (event, arg) => {
+//   console.log(arg)
+//   // fs.writeFileSync('theme.json', arg)
+// })

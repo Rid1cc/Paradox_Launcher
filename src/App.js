@@ -29,6 +29,7 @@ import wall0 from './media/wall0.png'
 import wall1 from './media/wall1.png'
 import wall2 from './media/wall2.png'
 import CancelIcon from '@material-ui/icons/Cancel';
+//NPM COMMENT
 const electron = window.require('electron')
 const ipc = electron.ipcRenderer
 
@@ -37,6 +38,7 @@ document.body.style.overflow = "hidden"
 
 
 const App = () => {
+  //NPM COMMENT
   const [user, setUser] = React.useState('')
   const [pass, setPass] = React.useState('')
   const [openError, setOpenError] = React.useState(false)
@@ -53,13 +55,18 @@ const App = () => {
   const [minRam, setMinRam] = React.useState('4000');
   const [maxRam, setMaxRam] = React.useState('6000');
 
+  
   const handleChangeMaxRam = (event) => {
+    event.target.focus();
     setMaxRam(event.target.value);
   }
   
   const handleChangeMinRam = (event) => {
+    event.target.focus();
     setMinRam(event.target.value);
   }
+
+
   const handleChangeVersions = (event) => {
     setMcVersions(event.target.value);
   };
@@ -102,17 +109,21 @@ const App = () => {
       fontSize: 15,
     }
   });
+
+    //NPM COMMENT
+    //ASYNCH
+
     ipc.on('loginError', (event, args) => {
       setOpenError(true)
     });
     
     const handleClick = () => {
-      ipc.send('logIn', {user, pass});
+      ipc.send('logIn', {user, pass, minRam, maxRam});
+      ipc.send('memory', {minRam, maxRam});
     }
     ipc.send('saveTheme', {theme: valueTheme})
     
-  
-
+    
   
     const handleUserChange = (event) => {
       event.preventDefault();
@@ -130,7 +141,7 @@ const App = () => {
     //BASIC THEME AND ROOT CSS
     <body>
     <div style={{
-      backgroundImage: 'url('+bgImg+')' ,
+      // backgroundImage: 'url('+bgImg+')' ,
       backgroundSize: 'cover',
       position: 'absolute',
       top: 0,
@@ -140,6 +151,9 @@ const App = () => {
       border: '3px solid #404040',
       borderRadius: '3px'
     }}>
+    <iframe className={classes.overVid} id="ytplayer" type="text/html" controls='0' disablekb="0" fs="0" loop="1"
+    src="https://www.youtube.com/embed/MLAjUatpzoM?autoplay=1"
+    frameborder="0" allow='autoplay'/>
     <ThemeProvider theme={darkTheme}>
     <div className={classes.root}>
 
@@ -167,6 +181,7 @@ const App = () => {
 
     {/* FUNCTIONS */}
     <LoginPanel 
+    //NPM COMMENT
      user={user}
      setUser={setUser}
      pass={pass}
