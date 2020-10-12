@@ -54,8 +54,8 @@ const App = () => {
   const [bgImg, setBgImg] = React.useState(wall0)
   const [minRam, setMinRam] = React.useState('4000');
   const [maxRam, setMaxRam] = React.useState('6000');
-
   
+
   const handleChangeMaxRam = (event) => {
     event.target.focus();
     setMaxRam(event.target.value);

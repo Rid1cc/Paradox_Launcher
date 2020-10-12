@@ -9,7 +9,7 @@ const nativeImage = require('electron').nativeImage;
 
     image.setTemplateImage(true);
 
-const runMC = (token, minRam, maxRam) => {
+const runMC = (token, minRam, maxRam, event) => {
   const launcher = new Client();
   const opts  = {
     clientPackage: null,
@@ -28,17 +28,17 @@ const runMC = (token, minRam, maxRam) => {
   launcher.launch(opts);
   launcher.on('debug', (e) => console.log(e));
   launcher.on('data', (e) => console.log(e));
-
+  launcher.on('progress', () => event.reply('loadingStart'));
 }
 const logIn = (event, user, pass, minRam, maxRam) => {
     if(pass) {
-      Authenticator.getAuth(user, pass).then(token => runMC(token)).catch(err => {
+      Authenticator.getAuth(user, pass).then(token => runMC(token, minRam, maxRam, event)).catch(err => {
         console.log(err)
         event.reply('loginError', {error: 'Login/password Error'})
       }
         )
     } else {
-      Authenticator.getAuth(user).then(token => runMC(token, minRam, maxRam))
+      Authenticator.getAuth(user).then(token => runMC(token, minRam, maxRam, event))
     }
   }
 
