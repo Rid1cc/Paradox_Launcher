@@ -9,14 +9,14 @@ const nativeImage = require('electron').nativeImage;
 
     image.setTemplateImage(true);
 
-const runMC = (token, minRam, maxRam, event) => {
+const runMC = (token, minRam, maxRam, event, mcVersions) => {
   const launcher = new Client();
   const opts  = {
     clientPackage: null,
     authorization: token,
     root: "./minecraft",
     version: {
-        number: "1.15.2",
+        number: mcVersions,
         type: "release"
     },
     memory: {
@@ -28,17 +28,20 @@ const runMC = (token, minRam, maxRam, event) => {
   launcher.launch(opts);
   launcher.on('debug', (e) => console.log(e));
   launcher.on('data', (e) => console.log(e));
-  launcher.on('progress', () => event.reply('loadingStart'));
+  launcher.on('download', () => event.reply('loadingStart'));
+  launcher.on('progress', () => event.reply('loading'));
+  launcher.on('arguments', () => event.reply('starting'));
+  launcher.on('close', () => event.reply('closed'))
 }
-const logIn = (event, user, pass, minRam, maxRam) => {
+const logIn = (event, user, pass, minRam, maxRam, mcVersions) => {
     if(pass) {
-      Authenticator.getAuth(user, pass).then(token => runMC(token, minRam, maxRam, event)).catch(err => {
+      Authenticator.getAuth(user, pass).then(token => runMC(token, minRam, maxRam, event, mcVersions)).catch(err => {
         console.log(err)
         event.reply('loginError', {error: 'Login/password Error'})
       }
         )
     } else {
-      Authenticator.getAuth(user).then(token => runMC(token, minRam, maxRam, event))
+      Authenticator.getAuth(user).then(token => runMC(token, minRam, maxRam, event, mcVersions))
     }
   }
 
@@ -66,11 +69,11 @@ function createWindow () {
 app.on('ready', createWindow)
 
 ipcMain.on('memory', (event, arg) => {
-  console.log(event, arg.maxRam, arg.minRam)
+  console.log(event, arg.maxRam, arg.minRam,)
 })
 
 ipcMain.on('logIn', (event, arg) => {
-  logIn(event, arg.user, arg.pass, arg.maxRam, arg.minRam)
+  logIn(event, arg.user, arg.pass, arg.maxRam, arg.minRam, arg.mcVersions)
 })
 
 // ipcMain.on('saveTheme', (event, arg) => {

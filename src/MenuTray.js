@@ -10,7 +10,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 export const MenuTray = (setOpenSettings, setOpenThemes) => {
     const classes = useStyles()
     return <div className={classes.settings}>
-    <Paper className={classes.settingsCanvas} onClick={() => setOpenSettings(true)}>
+    
+    {/* NOT HERE !!!!!!!! <Paper className={classes.settingsCanvas} onClick={() => setOpenSettings(true)}>
       <SettingsRoundedIcon color="secondary" className={classes.settingsIcon}/>   
     </Paper>
     <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
@@ -18,7 +19,7 @@ export const MenuTray = (setOpenSettings, setOpenThemes) => {
     </Paper>
     <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
       <HighlightOffIcon color="secondary" className={classes.settingsIcon}/>   
-    </Paper>
+    </Paper> */}
     </div>
 
 }

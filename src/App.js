@@ -18,6 +18,7 @@ import {useStyles} from './style'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CardSection } from './CardSection';
 import {Infos} from './Infos'
+import {Patchnotes} from './Patchnotes'
 import {Settings} from './Settings'
 import {Error} from './Error'
 import {LoginPanel} from './LoginPanel'
@@ -29,6 +30,9 @@ import wall0 from './media/wall0.png'
 import wall1 from './media/wall1.png'
 import wall2 from './media/wall2.png'
 import CancelIcon from '@material-ui/icons/Cancel';
+import YouTube from 'react-youtube';
+import VolumeDown from '@material-ui/icons/VolumeDown';
+import Slider from '@material-ui/core/Slider';
 //NPM COMMENT
 const electron = window.require('electron')
 const ipc = electron.ipcRenderer
@@ -43,18 +47,21 @@ const App = () => {
   const [pass, setPass] = React.useState('')
   const [openError, setOpenError] = React.useState(false)
   const [openInfos, setOpenInfos] = React.useState(false)
+  const [openPatchnotes, setOpenPatchnotes] = React.useState(false)
   const [openSettings, setOpenSettings] = React.useState(false)
   const [openThemes, setOpenThemes] = React.useState(false)
   const [isPremium, setIsPremium] = React.useState(true)
   const [valueTheme, setValueTheme] = React.useState('');
   const [openVersions, setOpenVersions] = React.useState(false);
-  const [mcVersions, setMcVersions] = React.useState(false);
+  const [mcVersions, setMcVersions] = React.useState('1.15.2');
   const classes = useStyles()
   const [color, setColor] = React.useState('#f50057');
   const [bgImg, setBgImg] = React.useState(wall0)
   const [minRam, setMinRam] = React.useState('4000');
   const [maxRam, setMaxRam] = React.useState('6000');
+  const [localVolume] = React.useState(50);
   
+
 
   const handleChangeMaxRam = (event) => {
     event.target.focus();
@@ -118,7 +125,7 @@ const App = () => {
     });
     
     const handleClick = () => {
-      ipc.send('logIn', {user, pass, minRam, maxRam});
+      ipc.send('logIn', {user, pass, minRam, maxRam, mcVersions});
       ipc.send('memory', {minRam, maxRam});
     }
     ipc.send('saveTheme', {theme: valueTheme})
@@ -135,7 +142,33 @@ const App = () => {
       setPass('')
     }
 
-    
+  
+    var YouTubeIframeLoader = require('youtube-iframe');
+    var player = require('youtube-iframe');
+    var events = [];
+    YouTubeIframeLoader.load(function(YT) {
+      player = new YT.Player('player', {
+          videoId: 'MLAjUatpzoM',
+          playerVars: {
+            autoplay: 1,
+            playlist: 'MLAjUatpzoM',
+            loop: 1,
+            controls: 0,
+            fs: 0,
+          },
+          events: {
+            'onReady': onYouTubeHTML5PlayerReady,
+          }
+      });
+  });
+  const onYouTubeHTML5PlayerReady = (event) => {
+    if (event && event.target) {
+      player = event.target;
+      player.setVolume(60);
+    }
+  }
+  
+
 
   return (
     //BASIC THEME AND ROOT CSS
@@ -151,9 +184,8 @@ const App = () => {
       border: '3px solid #404040',
       borderRadius: '3px'
     }}>
-    <iframe className={classes.overVid} id="ytplayer" type="text/html" controls='0' disablekb="0" fs="0" loop="1"
-    src="https://www.youtube.com/embed/MLAjUatpzoM?autoplay=1"
-    frameborder="0" allow='autoplay'/>
+    
+    <div className={classes.overVid} id="player"/>
     <ThemeProvider theme={darkTheme}>
     <div className={classes.root}>
 
@@ -164,7 +196,7 @@ const App = () => {
     <LoadBar/>
 
     {/* CARD SECTION */}
-    <CardSection setOpenInfos={setOpenInfos} />
+    <CardSection setOpenInfos={setOpenInfos} setOpenPatchnotes={setOpenPatchnotes} />
 
     {/* CORNER LEFT MENU */}
       <div className={classes.settings}>
@@ -217,9 +249,10 @@ const App = () => {
       handleThemeSubmit={handleThemeSubmit}
     />
     <Infos openInfos={openInfos} setOpenInfos={setOpenInfos}/>
+    <Patchnotes openPatchnotes={openPatchnotes} setOpenPatchnotes={setOpenPatchnotes}/>
 
 
-
+    
     
     </div>
     </ThemeProvider>

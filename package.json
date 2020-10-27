@@ -1,15 +1,16 @@
 {
-  "name": "paradox_launcher",
-  "description": "Simple minecraft launcher",
-  "version": "0.1.5",
+  "name": "paradox-launcher",
+  "description": "MC launcher",
+  "version": "0.0.1",
   "author": "Ridicc",
   "private": true,
   "main": "public/Main.js",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -23,7 +24,10 @@
     "react-css-transition": "^0.7.4",
     "react-dom": "^16.13.1",
     "react-iframe": "^1.8.0",
-    "react-scripts": "^3.4.3"
+    "react-native-webview": "^10.9.2",
+    "react-scripts": "^3.4.3",
+    "react-youtube": "^7.12.0",
+    "youtube-iframe": "^1.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.10.4",
     "electron": "^9.2.0",
     "electron-builder": "^22.8.0",
     "typescript": "^3.9.7"

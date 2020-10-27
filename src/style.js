@@ -10,8 +10,8 @@ export const useStyles = makeStyles({
       fontFamily: "'Farsan', cursive",
       position: 'relative',
       height: '95vh',
-      paddingTop: '4vh',
-      paddingBottom: '3vh',
+      paddingTop: '3vh',
+      paddingBottom: '4vh',
       paddingLeft:'1vw',
       paddingRight:'1vw',
     },
@@ -22,6 +22,8 @@ export const useStyles = makeStyles({
       height: '120%',
       right: '-10%',
       zIndex: '-100',
+      border: '3px solid #404040',
+      borderRadius: '3px'
     },
     button: {
       position: 'absolute',
@@ -122,13 +124,33 @@ export const useStyles = makeStyles({
       marginRight: '0.5vw',
       padding: '0.5vw',
     },
+    
     settingsIcon: {
       fontAlign: 'center',
       fontSize: '10',
-      verticalAlign: 'middle'
+      verticalAlign: 'middle',
+      
+    },
+    volumeIcon: {
+      marginTop: '0.5vw',
+      marginLeft:'0.5vw',
+    },
+    volumeSlider: {
+      marginLeft:'0.5vw',
+      width: '5vw',
+      color: 'secondary',
     },
     settingsInside: {
-      display: 'table',
+      position: 'relative',
+      display: 'flex',
+      flexBasis: '1vw',
+      
+    },
+    elementSettings: {
+      textAlign: 'center',
+      margin: '0.5vw',
+      paddingleft: '3vw',
+      paddingright: '3vw',
     }
   
   })

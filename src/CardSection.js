@@ -11,7 +11,7 @@ import {
   } from '@material-ui/core'
 
 
-export const CardSection = ({setOpenInfos}) => {
+export const CardSection = ({setOpenInfos, setOpenPatchnotes}) => {
     const classes = useStyles()
     return <div className={classes.cardSection}>
     <Card /*DISCORD*/ className={classes.disCard} >
@@ -84,8 +84,7 @@ export const CardSection = ({setOpenInfos}) => {
                 size="small" 
                 color="secondary" 
                 onClick={
-                  () => {window.open('https://discord.com/invite/U52rS2C'
-                  )}} 
+                  () => {setOpenPatchnotes(true)}} 
                   className={classes.cardButton}
                   >
                   Read
