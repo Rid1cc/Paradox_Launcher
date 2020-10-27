@@ -6,7 +6,7 @@ Simple electron + react minecraft launcher.
 
 ## Installation for the players
 
-Still in dev.
+Visit [Releases tab](https://github.com/Rid1cc/Paradox_Launcher/releases)
 
 ## Dev Installation
 
