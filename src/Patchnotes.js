@@ -3,7 +3,6 @@ import * as React from 'react'
 import {
     Button,
     Dialog,
-    DialogContentText,
     DialogTitle,
     DialogContent,
     DialogActions,
@@ -22,13 +21,13 @@ export const Patchnotes = ({openPatchnotes, setOpenPatchnotes}) => {
           <DialogTitle id="alert-dialog-title">{"Patchnotes"}</DialogTitle>
           <DialogContent>
           <Typography variant="h3" component="h2">
-            Version 0.0.1 alpha
+            Version 0.0.11 alpha
           </Typography>
           <Typography variant="h5" component="h2">
-            first alpha half-open release
+            "little" update
           </Typography>
           <Typography variant="subtitle1" component="h2">
-            - it works :D
+            Fixed some things, added a volume slider, improved logo and optimised code.
           </Typography>
 
           </DialogContent>

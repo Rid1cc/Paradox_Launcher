@@ -1,7 +1,7 @@
 {
   "name": "paradox-launcher",
   "description": "MC launcher",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "author": "Ridicc",
   "private": true,
   "main": "public/Main.js",
@@ -21,13 +21,12 @@
     "minecraft-launcher-core": "^3.14.6",
     "path": "^0.12.7",
     "react": "^16.13.1",
-    "react-css-transition": "^0.7.4",
+    "react-css-transition": "^0.7.2",
     "react-dom": "^16.13.1",
-    "react-iframe": "^1.8.0",
-    "react-native-webview": "^10.9.2",
-    "react-scripts": "^3.4.3",
-    "react-youtube": "^7.12.0",
-    "youtube-iframe": "^1.0.3"
+    "react-native-webview": "^11.6.5",
+    "react-player": "^2.9.0",
+    "react-scripts": "^1.1.5",
+    "use-debounce": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,7 +43,6 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
       "not op_mini all"
     ],
     "development": [
@@ -54,10 +52,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
     "@babel/plugin-transform-react-jsx": "^7.10.4",
-    "electron": "^9.2.0",
+    "@babel/preset-env": "^7.14.7",
+    "babel-loader": "^8.2.2",
+    "electron": "^13.1.6",
     "electron-builder": "^22.8.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "webpack": "^3.8.1"
   },
   "build": {
     "appId": "nonExistentID",

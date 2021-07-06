@@ -3,7 +3,6 @@ import * as React from 'react'
 import {
     Button,
     Dialog,
-    DialogContentText,
     DialogTitle,
     DialogContent,
     DialogActions,
