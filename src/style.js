@@ -106,9 +106,9 @@ export const useStyles = makeStyles({
   settings: {
     position: 'absolute',
     bottom: 0,
-    left: '1vw',
+    left: '0.5vw',
     display: 'flex',
-    marginBottom: '4vh',
+    marginBottom: '2vh',
 
   },
   hoovArrow: {
@@ -118,12 +118,11 @@ export const useStyles = makeStyles({
   },
   settingsCanvas: {
     marginRight: '0.5vw',
-    padding: '0.5vw',
+    padding: '0.5em',
     cursor: 'pointer'
   },
   settingsCanvasSlider: {
-    marginRight: '0.5vw',
-    padding: '0.5vw',
+    padding: '0.5em',
     paddingRight: '1vw',
     display: 'flex',
     flexWrap: 'nowrap'

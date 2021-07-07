@@ -11,9 +11,7 @@
 // More about MIT -> https://choosealicense.com/licenses/mit/
 
 import React from 'react';
-import { Paper } from '@material-ui/core'
 import './App.css'
-import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import { useStyles } from './style'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CardSection } from './CardSection';
@@ -22,18 +20,16 @@ import { Patchnotes } from './Patchnotes'
 import { Settings } from './Settings'
 import { Error } from './Error'
 import { LoginPanel } from './LoginPanel'
-import ImageIcon from '@material-ui/icons/Image';
 import { Themes } from './Themes'
 import { Logo } from './Logo'
 import { LoadBar } from './LoadBar'
-import CancelIcon from '@material-ui/icons/Cancel';
+import { MenuTray } from './MenuTray'
 import ReactPlayer from 'react-player'
-import Slider from '@material-ui/core/Slider';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDebouncedCallback } from 'use-debounce';
+import { Vid } from './Vid'
 //NPM COMMENT
-const electron = window.require('electron')
-const ipc = electron.ipcRenderer
+// const electron = window.require('electron')
+// const ipc = electron.ipcRenderer
 
 
 document.body.style.overflow = "hidden"
@@ -41,8 +37,8 @@ document.body.style.overflow = "hidden"
 
 const App = () => {
   //NPM COMMENT
-  const [user, setUser] = React.useState('')
-  const [pass, setPass] = React.useState('')
+  // const [user, setUser] = React.useState('')
+  // const [pass, setPass] = React.useState('')
   const [openError, setOpenError] = React.useState(false)
   const [openInfos, setOpenInfos] = React.useState(false)
   const [openPatchnotes, setOpenPatchnotes] = React.useState(false)
@@ -57,6 +53,8 @@ const App = () => {
   const [minRam, setMinRam] = React.useState('4000');
   const [maxRam, setMaxRam] = React.useState('6000');
   const [vidVolume, setVidVolume] = React.useState(0.5);
+  const [slidState, setSlidState] = React.useState(false);
+  const [muteVisible, setMuteVisible] = React.useState('no')
 
   const handleDebouncedVolumeChange = useDebouncedCallback((volume) => {
     setVidVolume(volume)
@@ -117,27 +115,27 @@ const App = () => {
   //NPM COMMENT
   //ASYNCH
 
-  ipc.on('loginError', (event, args) => {
-    setOpenError(true)
-  });
+  // ipc.on('loginError', (event, args) => {
+  //   setOpenError(true)
+  // });
 
-  const handleClick = () => {
-    ipc.send('logIn', { user, pass, minRam, maxRam, mcVersions });
-    ipc.send('memory', { minRam, maxRam });
-  }
-  ipc.send('saveTheme', { theme: valueTheme })
+  // const handleClick = () => {
+  //   ipc.send('logIn', { user, pass, minRam, maxRam, mcVersions });
+  //   ipc.send('memory', { minRam, maxRam });
+  // }
+  // ipc.send('saveTheme', { theme: valueTheme })
 
 
 
-  const handleUserChange = (event) => {
-    event.preventDefault();
-    event.target.focus();
-    setUser(event.target.value)
-  }
-  const handlePremiumChange = event => {
-    setIsPremium(event.target.checked)
-    setPass('')
-  }
+  // const handleUserChange = (event) => {
+  //   event.preventDefault();
+  //   event.target.focus();
+  //   setUser(event.target.value)
+  // }
+  // const handlePremiumChange = event => {
+  //   setIsPremium(event.target.checked)
+  //   setPass('')
+  // }
 
 
 
@@ -155,25 +153,9 @@ const App = () => {
         border: '3px solid #404040',
         borderRadius: '3px'
       }}>
+        {/* BACKGROUND */}
+        <Vid vidVolume={vidVolume} />
 
-        <ReactPlayer
-          width='120%'
-          height='120%'
-          volume={vidVolume}
-          className={classes.overVid}
-          url={'https://www.youtube.com/watch?v=MLAjUatpzoM'}
-          config={{
-            youtube: {
-              playerVars: {
-                autoplay: 1,
-                playlist: 'MLAjUatpzoM',
-                loop: 1,
-                controls: 0,
-                fs: 0,
-              },
-            },
-          }}
-        />
         <ThemeProvider theme={darkTheme}>
           <div className={classes.root}>
 
@@ -187,43 +169,29 @@ const App = () => {
             <CardSection setOpenInfos={setOpenInfos} setOpenPatchnotes={setOpenPatchnotes} />
 
             {/* CORNER LEFT MENU */}
-            <div className={classes.settings}>
-              <Paper className={classes.settingsCanvas} onClick={() => window.close()}>
-                <CancelIcon color="secondary" className={classes.settingsIcon} />
-              </Paper>
-              <Paper className={classes.settingsCanvas} onClick={() => setOpenSettings(true)}>
-                <SettingsRoundedIcon color="secondary" className={classes.settingsIcon} />
-              </Paper>
-              <Paper className={classes.settingsCanvas} onClick={() => setOpenThemes(true)}>
-                <ImageIcon color="secondary" className={classes.settingsIcon} />
-              </Paper>
-              <Paper className={classes.settingsCanvasSlider}>
-                <VolumeUp color='secondary' className={classes.settingsIcon} />
-                <Slider
-                  className={classes.vidSlider}
-                  defaultValue={vidVolume * 100}
-                  valueLabelDisplay="auto"
-                  onChange={(event, value) => handleDebouncedVolumeChange(value / 100)}
-                  step={1}
-                  min={0}
-                  max={100}
-                  color='secondary'
-                />
-              </Paper>
-            </div>
+            <MenuTray
+            muteVisible={muteVisible}
+            setMuteVisible={setMuteVisible}
+            setOpenSettings={setOpenSettings}
+            setOpenThemes={setOpenThemes}
+            vidVolume={vidVolume}
+            handleDebouncedVolumeChange={handleDebouncedVolumeChange}
+            slidState={slidState}
+            setSlidState={setSlidState}
+            />
 
             {/* FUNCTIONS */}
             <LoginPanel
-              //NPM COMMENT
-              user={user}
-              setUser={setUser}
-              pass={pass}
-              setPass={setPass}
-              isPremium={isPremium}
-              setIsPremium={setIsPremium}
-              handleUserChange={handleUserChange}
-              handlePremiumChange={handlePremiumChange}
-              handleClick={handleClick}
+            //NPM COMMENT
+            // user={user}
+            // setUser={setUser}
+            // pass={pass}
+            // setPass={setPass}
+            // isPremium={isPremium}
+            // setIsPremium={setIsPremium}
+            // handleUserChange={handleUserChange}
+            // handlePremiumChange={handlePremiumChange}
+            // handleClick={handleClick}
             />
             <Error openError={openError} setOpenError={setOpenError} />
             <Settings
