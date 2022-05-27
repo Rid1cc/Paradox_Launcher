@@ -1,3 +1,5 @@
+#Project abandoned (for now)
+
 # Paradox Launcher
 Simple electron + react minecraft launcher.
 
@@ -10,7 +12,7 @@ Visit [Releases tab](https://github.com/Rid1cc/Paradox_Launcher/releases)
 
 ## Dev Installation
 
-Firstable :
+First of all :
 
 ```bash
 npm install
