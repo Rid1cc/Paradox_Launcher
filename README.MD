@@ -1,4 +1,4 @@
-#Project abandoned (for now)
+# Project abandoned (for now)
 
 # Paradox Launcher
 Simple electron + react minecraft launcher.
